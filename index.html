@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ko" class="en">
     
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -706,46 +706,72 @@
                 </p>
             </div>
             <div class="form" data-aos="fade-up" data-aos-delay="400">
-                <form id="cForm" action="#" method="post" name="">
-                    
-                    <div class="input-wrap">
-                        <div>
-                            <label for="">회사명<span>*</span></label>
-                            <input type="text" name="com_title" placeholder="회사명을 입력해주세요 " message="회사명을 입력해주세요" value="" required>
-                        </div>
-                        
-                        <div>
-                            <label for="">대표자(담당자)명<span>*</span></label>
-                            <input type="text" name="com_name" placeholder="대표자(담당자)명을 입력해주세요" message="대표자(담당자)명을 입력해주세요" value="" required>
-                        </div>
-
-                        <div>
-                            <label for="">연락처<span>*</span></label>
-                            <div class="inp">
-                                <input type="text" name="com_tel1" value="" required>
-                                -
-                                <input type="text" name="com_tel2" value="" required>
-                                -
-                                <input type="text" name="com_tel3" value="" required>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label for="">문의사항<span>*</span></label>
-                            <textarea name="com_detail" id="" message="문의내용을 확인해주세요." required></textarea>
-                        </div>
+                <form 
+                id="cForm"
+                action="https://formspree.io/f/xreawrzk"
+                method="POST"
+            >
+            
+                <!-- Formspree 옵션 -->
+                <input type="hidden" name="_subject" value="젤라또 랜딩페이지 문의 접수">
+                <input type="hidden" name="_captcha" value="false">
+            
+                <div class="input-wrap">
+                    <div>
+                        <label>회사명<span>*</span></label>
+                        <input type="text" 
+                               name="company" 
+                               placeholder="회사명을 입력해주세요" 
+                               required>
                     </div>
                     
-                    <div class="checkbox-wrap">
-                        <input type="checkbox" name="agree1" id="agree1" value="Y" data-title="개인정보처리방침에 동의합니다." message="개인정보처리방침에 동의해주세요."  required>
-                        <label for="agree1"><span></span>개인정보처리방침에 동의합니다.
-                            <a href="#a" class="privacy_btn">[자세히보기]</a>
-                        </label>
+                    <div>
+                        <label>대표자(담당자)명<span>*</span></label>
+                        <input type="text" 
+                               name="name" 
+                               placeholder="대표자(담당자)명을 입력해주세요" 
+                               required>
                     </div>
-                    <button class="btn-save" type="submit">
-                        <span>신청하기</span>
-                    </button>
-                </form>
+            
+                    <div>
+                        <label>연락처<span>*</span></label>
+                        <div class="inp">
+                            <input type="text" name="phone1" required>
+                            -
+                            <input type="text" name="phone2" required>
+                            -
+                            <input type="text" name="phone3" required>
+                        </div>
+                    </div>
+            
+                    <div>
+                        <label>문의사항<span>*</span></label>
+                        <textarea 
+                            name="message" 
+                            required 
+                            placeholder="문의 내용을 입력해주세요."
+                        ></textarea>
+                    </div>
+                </div>
+                
+                <div class="checkbox-wrap">
+                    <input type="checkbox" 
+                           name="privacy_agree" 
+                           id="agree1" 
+                           value="동의함" 
+                           required>
+                    <label for="agree1">
+                        <span></span>
+                        개인정보처리방침에 동의합니다.
+                        <a href="#a" class="privacy_btn">[자세히보기]</a>
+                    </label>
+                </div>
+            
+                <button class="btn-save" type="submit">
+                    <span>신청하기</span>
+                </button>
+            
+            </form>
             </div>
         </div>
         <div class="pop_wrap" id="privacyPop">
