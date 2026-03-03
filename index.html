@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko" class="en">
     
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -79,7 +79,7 @@
     <div class="header_box">
         <div class="w1400">
             <h1 class="h_logoBox">
-                <a href="index.php"></a>
+                <a href="index.html"></a>
             </h1>
             <nav class="h_nav">
                
@@ -105,13 +105,13 @@
                 <!--
                             <ul class="lang flex a_i_center">
                                 <li>
-                                    <img src="/images/icon/lang_ic_w.png" alt="" class="lang_ic">
+                                    <img src="images/icon/lang_ic_w.png" alt="" class="lang_ic">
                                 </li>
                                 <li class="ko">
-                                    <a href="/switchLang/ko" class="fs15 ">KR</a>
+                                    <a href="switchLang/ko" class="fs15 ">KR</a>
                                 </li>
                                 <li class="en">
-                                    <a href="/switchLang/en" class="fs15 on">EN</a>
+                                    <a href="switchLang/en" class="fs15 on">EN</a>
                                 </li>
                             </ul>
                             -->
@@ -706,7 +706,7 @@
                 </p>
             </div>
             <div class="form" data-aos="fade-up" data-aos-delay="400">
-                <form id="cForm" action="/qa_submit.php" method="post" name="">
+                <form id="cForm" action="#" method="post" name="">
                     
                     <div class="input-wrap">
                         <div>
@@ -743,38 +743,9 @@
                         </label>
                     </div>
                     <button class="btn-save" type="submit">
-                        <!-- 완료페이지 /itc/contact/complete?menuId=20 -->
                         <span>신청하기</span>
                     </button>
                 </form>
-                <script>
-    	$('#cForm').on('submit', function(e) {
-            e.preventDefault(); // 기본 제출 막기
-            $.ajax({
-                url: '/qa_submit.php',
-                type: 'POST',
-                data: $(this).serialize(), // 폼 데이터를 문자열로 직렬화
-                success: function(response) {
-                    if(response === 'true'){
-                    	alert("정상적으로 신청되었습니다.");
-                    	$("#com_title").val("");
-                    	$("#com_name").val("");
-                    	$("#com_tel1").val("");
-                    	$("#com_tel2").val("");
-                    	$("#com_tel3").val("");
-                    	$("#com_detail").val("");
-                    }else{
-                    	alert("등록이 실패되었습니다.");
-                    	console.log(response);
-                    }
-                },
-                error: function(error) {
-                	alert("등록이 실패되었습니다.");
-                    console.error('오류:', error);
-                }
-            });
-        });
-    </script>
             </div>
         </div>
         <div class="pop_wrap" id="privacyPop">
@@ -945,22 +916,7 @@
 	});
 </script>    <script>
         $(document).ready(function () {
-
-	        $(".catcha-img.captcha-footer").find("img").attr("src", $(".catcha-img.captcha-main").find("img").attr("src"))
-
-            $('.recaptcha').on('click', function(e){
-                e.preventDefault();
-
-                var anchor = $(".catcha-img");
-                var captcha = anchor.find('img');
-
-                $.ajax({
-                    type: "GET",
-                    url: '/ajax_regen_captcha',
-                }).done(function( msg ) {
-                    captcha.attr('src', msg);
-                });
-            });
+            // 정적 페이지 전환으로 캡차 갱신용 AJAX는 제거되었습니다.
         });
     </script>
 
