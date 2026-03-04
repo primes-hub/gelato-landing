@@ -1,0 +1,141 @@
+/* GELATO MACHINE DISPENSER SECTION */
+.main .dispenser{padding-top:150px}
+.main .dispenser .dispenser-top-box{text-align:center;margin-bottom:80px}
+.main .dispenser .dispenser-top-box .subtitle{font-family:"Oswald",sans-serif;font-size:1.25rem;font-weight:700;text-transform:uppercase;color:#c7a865;margin-bottom:20px;text-align:center}
+.main .dispenser .dispenser-top-box .main-title{font-size:2.75rem;font-weight:700;color:#fff;margin-bottom:20px;line-height:1.3}
+.main .dispenser .dispenser-top-box .desc-txt{font-size:1.25rem;color:rgba(255,255,255,.7);line-height:1.5}
+.main .dispenser .dispenser-models{
+    display:flex;
+    justify-content:center; /* center the model items */
+    gap:20px; /* 20px spacing between images */
+    margin-bottom:100px;
+    align-items:flex-start;
+}
+.main .dispenser .dispenser-models .model-item{
+    flex:0 0 auto;
+    max-width:380px; /* allow slightly larger images */
+    position:relative;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.main .dispenser .dispenser-models .model-badge{font-family:"Oswald",sans-serif;font-size:0.875rem;color:#c7a865;font-weight:700;text-transform:uppercase;margin-bottom:15px}
+.main .dispenser .dispenser-models .model-item img{
+    width:100%;
+    max-width:360px; /* increase visual size */
+    height:auto;
+    display:block;
+    margin:0 0 20px 0; /* bottom spacing */
+    padding:18px;
+    border-radius:8px;
+    box-sizing:border-box;
+    border: none;
+    background-clip: padding-box;
+}
+.main .dispenser .dispenser-models .model-name{font-size:1.75rem;font-weight:700;color:#fff}
+/* image-box background per model (apply to .model-item with modifier) */
+.main .dispenser .dispenser-models .model-item.white-model img{background-color:#F9F7F2}
+.main .dispenser .dispenser-models .model-item.black-model img{background-color:#0F172A}
+.main .dispenser .dispenser-features{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+.main .dispenser .dispenser-features .feature-item{text-align:center;padding:30px;border-radius:10px;background:linear-gradient(135deg, rgba(199,168,101,.05), rgba(199,168,101,.02))}
+.main .dispenser .dispenser-features .feature-num{width:72px;height:72px;margin:0 auto 20px;display:inline-flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:#c7a865;border:1px solid rgba(199,168,101,.9);border-radius:50%;background:transparent;line-height:1}
+.main .dispenser .dispenser-features .feature-label{
+    font-size:1.125rem;
+    font-weight:700;
+    color:#fff;
+    margin:0;
+    min-height:50px;
+    display:block; /* ensure ::after sits below the label */
+    text-align:center;
+    padding-bottom:6px;
+}
+/* small centered white divider (10px width × 1px height) placed under the label */
+.main .dispenser .dispenser-features .feature-label::after{
+    content: "";
+    display:block;
+    width:10px;
+    height:1px;
+    background:#fff;
+    margin:16px auto;
+    border-radius:1px;
+    opacity:1;
+}
+.main .dispenser .dispenser-features .feature-txt{
+    font-size:0.95rem;
+    color:rgba(255,255,255,.9);
+    line-height:1.6;
+    margin-top:0; /* divider margin handles all spacing */
+}
+
+/* Tablet (1024px ~ 1200px) */
+@media screen and (min-width: 1024px) and (max-width: 1200px){
+    .main .dispenser{padding-top:120px}
+    .main .dispenser .dispenser-top-box{margin-bottom:60px}
+    .main .dispenser .dispenser-top-box .main-title{font-size:2.25rem;margin-bottom:16px}
+    .main .dispenser .dispenser-top-box .desc-txt{font-size:1.05rem}
+    .main .dispenser .dispenser-models{gap:30px;margin-bottom:80px}
+    .main .dispenser .dispenser-models .model-item img{max-width:320px;padding:16px;margin-bottom:16px}
+    .main .dispenser .dispenser-features{grid-template-columns:repeat(2, 1fr);gap:24px}
+    .main .dispenser .dispenser-features .feature-item{padding:28px 24px}
+    .main .dispenser .dispenser-features .feature-num{width:64px;height:64px;font-size:1.35rem}
+}
+
+/* Tablet (768px ~ 1023px) */
+@media screen and (min-width: 768px) and (max-width: 1023px){
+    .main .dispenser{padding-top:100px}
+    .main .dispenser .dispenser-top-box{margin-bottom:50px}
+    .main .dispenser .dispenser-top-box .subtitle{font-size:0.95rem;margin-bottom:14px}
+    .main .dispenser .dispenser-top-box .main-title{font-size:1.95rem;margin-bottom:14px;line-height:1.35}
+    .main .dispenser .dispenser-top-box .desc-txt{font-size:0.95rem;line-height:1.5}
+    .main .dispenser .dispenser-models{flex-direction:column;justify-content:center;align-items:center;gap:35px;margin-bottom:70px}
+    .main .dispenser .dispenser-models .model-item{flex:0 0 auto;max-width:320px;margin:0 auto}
+    .main .dispenser .dispenser-models .model-item img{padding:14px;margin-bottom:14px;max-width:100%}
+    .main .dispenser .dispenser-models .model-name{font-size:1.35rem}
+    .main .dispenser .dispenser-features{grid-template-columns:repeat(2, 1fr);gap:18px}
+    .main .dispenser .dispenser-features .feature-item{padding:24px 18px}
+    .main .dispenser .dispenser-features .feature-num{width:56px;height:56px;font-size:1.2rem;margin-bottom:14px}
+    .main .dispenser .dispenser-features .feature-label{font-size:1rem;min-height:44px;padding-bottom:8px}
+    .main .dispenser .dispenser-features .feature-label::after{margin:16px auto}
+    .main .dispenser .dispenser-features .feature-txt{font-size:0.9rem;margin-top:8px}
+}
+
+/* Mobile (480px ~ 767px) */
+@media screen and (min-width: 480px) and (max-width: 767px){
+    .main .dispenser{padding-top:80px;padding-bottom:60px}
+    .main .dispenser .dispenser-top-box{margin-bottom:48px;padding:0 20px;text-align:center}
+    .main .dispenser .dispenser-top-box .subtitle{font-size:0.85rem;margin-bottom:12px;letter-spacing:0.5px}
+    .main .dispenser .dispenser-top-box .main-title{font-size:1.75rem;margin-bottom:16px;line-height:1.4}
+    .main .dispenser .dispenser-top-box .desc-txt{font-size:0.90rem;line-height:1.6;margin-bottom:0}
+    .main .dispenser .dispenser-models{flex-direction:column;justify-content:center;align-items:center;gap:24px;margin-bottom:64px;padding:0 20px}
+    .main .dispenser .dispenser-models .model-item{flex:0 0 auto;max-width:280px;margin:0 auto;text-align:center}
+    .main .dispenser .dispenser-models .model-item img{padding:14px;margin-bottom:16px;max-width:100%;height:auto}
+    .main .dispenser .dispenser-models .model-badge{font-size:0.75rem;margin-bottom:12px}
+    .main .dispenser .dispenser-models .model-name{font-size:1.25rem;margin-top:8px}
+    .main .dispenser .dispenser-features{grid-template-columns:1fr;gap:16px;padding:0 20px}
+    .main .dispenser .dispenser-features .feature-item{padding:24px 20px;border-radius:10px}
+    .main .dispenser .dispenser-features .feature-num{width:56px;height:56px;font-size:1.2rem;margin-bottom:16px}
+    .main .dispenser .dispenser-features .feature-label{font-size:1rem;min-height:44px;padding-bottom:0}
+    .main .dispenser .dispenser-features .feature-label::after{width:10px;height:1.5px;margin:16px auto}
+    .main .dispenser .dispenser-features .feature-txt{font-size:0.88rem;margin-top:0;line-height:1.5;color:rgba(255,255,255,.9)}
+}
+
+/* Mobile Small (max-width: 479px) */
+@media screen and (max-width: 479px){
+    .main .dispenser{padding-top:72px;padding-bottom:56px}
+    .main .dispenser .dispenser-top-box{margin-bottom:40px;padding:0 20px;text-align:center}
+    .main .dispenser .dispenser-top-box .subtitle{font-size:0.75rem;margin-bottom:10px;letter-spacing:0.4px;font-weight:700}
+    .main .dispenser .dispenser-top-box .main-title{font-size:1.50rem;margin-bottom:14px;line-height:1.45;word-break:keep-all}
+    .main .dispenser .dispenser-top-box .desc-txt{font-size:0.85rem;line-height:1.6;margin-bottom:0;word-break:keep-all}
+    .main .dispenser .dispenser-models{flex-direction:column;justify-content:center;align-items:center;gap:20px;margin-bottom:56px;padding:0 20px}
+    .main .dispenser .dispenser-models .model-item{flex:0 0 auto;max-width:260px;margin:0 auto;text-align:center}
+    .main .dispenser .dispenser-models .model-item img{padding:12px;margin-bottom:14px;max-width:100%;height:auto;border-radius:8px}
+    .main .dispenser .dispenser-models .model-badge{font-size:0.70rem;margin-bottom:12px;text-transform:uppercase}
+    .main .dispenser .dispenser-models .model-name{font-size:1.10rem;margin-top:8px;font-weight:700}
+    .main .dispenser .dispenser-features{grid-template-columns:1fr;gap:14px;padding:0 20px}
+    .main .dispenser .dispenser-features .feature-item{padding:20px 18px;border-radius:8px;background:linear-gradient(135deg, rgba(199,168,101,.08), rgba(199,168,101,.03))}
+    .main .dispenser .dispenser-features .feature-num{width:52px;height:52px;font-size:1.1rem;margin-bottom:14px;border:1px solid rgba(199,168,101,.85)}
+    .main .dispenser .dispenser-features .feature-label{font-size:0.95rem;min-height:40px;padding-bottom:0;word-break:keep-all}
+    .main .dispenser .dispenser-features .feature-label::after{width:8px;height:1px;margin:14px auto}
+    .main .dispenser .dispenser-features .feature-txt{font-size:0.83rem;margin-top:0;line-height:1.5;color:rgba(255,255,255,.88);word-break:keep-all}
+}
