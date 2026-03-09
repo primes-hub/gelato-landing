@@ -197,107 +197,67 @@ $(document).ready(function () {
 // Store Network – 한국 지도 핀 렌더링
 // ─────────────────────────────────────────────────────
 ;(function () {
-    var GOLD = '#c7a865';
     var PINS = [
-        { id: 'incheon',    label: '인천', left: 32, top: 32, size: 'sm' },
-        { id: 'suwon',      label: '수원', left: 41, top: 35, size: 'sm' },
-        { id: 'pyeongtaek', label: '',     left: 40, top: 37, size: 'sm' },
-        { id: 'daejeon',    label: '대전', left: 42, top: 48, size: 'md' },
-        { id: 'sejong',     label: '',     left: 44, top: 48, size: 'sm' },
-        { id: 'cheongju',   label: '',     left: 47, top: 46, size: 'sm' },
-        { id: 'cheonan',    label: '',     left: 41, top: 44, size: 'sm' },
-        { id: 'chungju',    label: '',     left: 50, top: 43, size: 'sm' },
-        { id: 'gwangju',    label: '광주', left: 31, top: 62, size: 'md' },
-        { id: 'jeonju',     label: '전주', left: 37, top: 55, size: 'sm' },
-        { id: 'changwon',   label: '창원', left: 58, top: 71, size: 'sm' },
-        { id: 'mokpo',      label: '',     left: 27, top: 69, size: 'sm' },
-        { id: 'yeosu',      label: '',     left: 39, top: 71, size: 'sm' },
-        { id: 'jinju',      label: '',     left: 54, top: 70, size: 'sm' },
-        { id: 'gimhae',     label: '',     left: 62, top: 70, size: 'sm' },
-        { id: 'gangneung',  label: '강릉', left: 72, top: 38, size: 'md' },
-        { id: 'chuncheon',  label: '춘천', left: 52, top: 29, size: 'md' },
-        { id: 'wonju',      label: '원주', left: 56, top: 33, size: 'sm' },
-        { id: 'sokcho',     label: '',     left: 70, top: 27, size: 'sm' },
-        { id: 'donghae',    label: '',     left: 71, top: 45, size: 'md' },
-        { id: 'samcheok',   label: '',     left: 69, top: 47, size: 'sm' },
-        { id: 'taebaek',    label: '',     left: 64, top: 44, size: 'sm' },
-        { id: 'jeongseon',  label: '',     left: 62, top: 41, size: 'sm' },
-        { id: 'yeongwol',   label: '',     left: 59, top: 41, size: 'sm' },
-        { id: 'pohang',     label: '포항', left: 67, top: 54, size: 'sm' },
-        { id: 'andong',     label: '',     left: 60, top: 52, size: 'sm' },
-        { id: 'ulsan',      label: '울산', left: 66, top: 62, size: 'sm' },
-        { id: 'jeju',       label: '제주', left: 28, top: 87, size: 'sm' }
-    ];
-    var SIZES = {
-        lg: { mid: 11, inner: 2.8 },
-        md: { mid: 6,  inner: 1.8 },
-        sm: { mid: 3.5, inner: 1  }
-    };
-    var NS = 'http://www.w3.org/2000/svg';
+        /* ── lg (pulse) — 4 주요 거점 ── */
+        { id: 'incheon',    left: 33, top: 33, size: 'lg' },
+        { id: 'gangneung',  left: 71, top: 39, size: 'lg' },
+        { id: 'daejeon',    left: 42, top: 49, size: 'lg' },
+        { id: 'ulsan',      left: 67, top: 63, size: 'lg' },
 
-    function mkCircle(attrs, style) {
-        var c = document.createElementNS(NS, 'circle');
-        for (var k in attrs) c.setAttribute(k, attrs[k]);
-        if (style) for (var s in style) c.style[s] = style[s];
-        return c;
-    }
+        /* ── md — 8 중형 거점 ── */
+        { id: 'chuncheon',  left: 52, top: 30, size: 'md' },
+        { id: 'suwon',      left: 40, top: 36, size: 'md' },
+        { id: 'wonju',      left: 57, top: 35, size: 'md' },
+        { id: 'cheongju',   left: 47, top: 47, size: 'md' },
+        { id: 'pohang',     left: 68, top: 55, size: 'md' },
+        { id: 'jeonju',     left: 37, top: 58, size: 'md' },
+        { id: 'changwon',   left: 59, top: 71, size: 'md' },
+        { id: 'jeju',       left: 31, top: 86, size: 'md' },
+
+        /* ── sm — 배경 분포 ── */
+        { id: 'paju',       left: 35, top: 25, size: 'sm' },
+        { id: 'uijb',       left: 43, top: 27, size: 'sm' },
+        { id: 'gapyeong',   left: 50, top: 28, size: 'sm' },
+        { id: 'hwacheon',   left: 55, top: 25, size: 'sm' },
+        { id: 'inje',       left: 61, top: 27, size: 'sm' },
+        { id: 'goseong',    left: 67, top: 24, size: 'sm' },
+        { id: 'sokcho',     left: 70, top: 29, size: 'sm' },
+        { id: 'hongcheon',  left: 56, top: 33, size: 'sm' },
+        { id: 'pyeongtaek', left: 40, top: 40, size: 'sm' },
+        { id: 'cheonan',    left: 42, top: 44, size: 'sm' },
+        { id: 'chungju',    left: 51, top: 43, size: 'sm' },
+        { id: 'taebaek',    left: 65, top: 45, size: 'sm' },
+        { id: 'boryeong',   left: 35, top: 52, size: 'sm' },
+        { id: 'andong',     left: 61, top: 53, size: 'sm' },
+        { id: 'gunsan',     left: 33, top: 57, size: 'sm' },
+        { id: 'gumi',       left: 57, top: 58, size: 'sm' },
+        { id: 'gyeongju',   left: 67, top: 61, size: 'sm' },
+        { id: 'naju',       left: 30, top: 67, size: 'sm' },
+        { id: 'jinju',      left: 54, top: 72, size: 'sm' },
+        { id: 'yeosu',      left: 42, top: 74, size: 'sm' }
+    ];
+    var OFFSET = { left: -7, top: -4 }; /* 전체 위치 조정: 좌측·위로 이동 */
 
     function renderStorePins() {
-        var svg = document.getElementById('sn-pins-svg');
-        if (!svg) return;
+        var container = document.getElementById('sn-pins-svg');
+        if (!container) return;
+        container.innerHTML = '';
 
         PINS.forEach(function (pin) {
-            var sz = SIZES[pin.size];
-            var rMid   = sz.mid   / 2;
-            var rInner = sz.inner / 2;
-            var outerOpacity = pin.size === 'lg' ? 0.45 : pin.size === 'md' ? 0.35 : 0.22;
-            var fillOpacity  = pin.size === 'lg' ? 1    : pin.size === 'md' ? 0.85 : 0.6;
+            var pin_div = document.createElement('div');
+            pin_div.className = 'sn-pin sn-pin-' + pin.size;
+            pin_div.style.left = (pin.left + OFFSET.left) + '%';
+            pin_div.style.top  = (pin.top  + OFFSET.top)  + '%';
 
-            var g = document.createElementNS(NS, 'g');
-            g.setAttribute('transform', 'translate(' + pin.left + ',' + pin.top + ')');
+            var outer = document.createElement('div');
+            outer.className = 'pin-outer';
 
-            if (pin.size === 'lg') {
-                [[0.5, '0s'], [0.4, '1s'], [0.3, '2s']].forEach(function (cfg) {
-                    g.appendChild(mkCircle(
-                        { 'class': 'sn-glow-ring', fill: 'none', stroke: GOLD, 'stroke-width': cfg[0] },
-                        { animationDelay: cfg[1], filter: 'blur(0.3px)' }
-                    ));
-                });
-                g.appendChild(mkCircle({ r: rMid * 1.2, fill: GOLD, opacity: '0.08' }, { filter: 'blur(1.5px)' }));
-            } else if (pin.size === 'md') {
-                g.appendChild(mkCircle({ r: rMid * 1.2, fill: GOLD, opacity: '0.04' }, { filter: 'blur(1.5px)' }));
-            }
+            var inner = document.createElement('div');
+            inner.className = 'pin-inner';
 
-            g.appendChild(mkCircle({
-                r: rMid,
-                fill: pin.size === 'sm' ? 'rgba(199,168,101,0.06)' : 'rgba(199,168,101,0.12)',
-                stroke: GOLD,
-                'stroke-width': pin.size === 'lg' ? '0.3' : '0.2',
-                'stroke-opacity': outerOpacity
-            }));
-
-            var inner = mkCircle({ r: rInner, fill: GOLD, 'fill-opacity': fillOpacity });
-            if (pin.size === 'lg') {
-                inner.setAttribute('class', 'sn-pulse-core');
-                inner.style.filter = 'drop-shadow(0 0 2px rgba(199,168,101,0.8))';
-            }
-            g.appendChild(inner);
-
-            if (pin.size === 'lg' && pin.label) {
-                var txt = document.createElementNS(NS, 'text');
-                txt.setAttribute('x', rMid + 1.5);
-                txt.setAttribute('y', '0.5');
-                txt.setAttribute('fill', '#fff');
-                txt.setAttribute('font-size', '2.8');
-                txt.setAttribute('font-weight', '600');
-                txt.setAttribute('dominant-baseline', 'middle');
-                txt.style.letterSpacing = '0.01em';
-                txt.style.filter = 'drop-shadow(0 1px 3px rgba(0,0,0,0.9))';
-                txt.textContent = pin.label;
-                g.appendChild(txt);
-            }
-
-            svg.appendChild(g);
+            pin_div.appendChild(outer);
+            pin_div.appendChild(inner);
+            container.appendChild(pin_div);
         });
     }
 
@@ -313,75 +273,56 @@ function formatNumber(n) {
     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-// 카운트 업 함수 (jQuery animate 이용)
-(function ($) {
-    $.fn.countUp = function (opts) {
-        const opt = $.extend({ duration: 1200, decimal: 0 }, opts);
-        return this.each(function () {
-            const $el = $(this);
-            if ($el.data('counted')) return; // 중복 방지
-
-            // 목표값: data-target 우선, 없으면 현재 텍스트에서 쉼표 제거 후 숫자화
-            const raw = $el.data('target') ?? $el.text().replace(/,/g, '');
-            const target = parseFloat(raw);
-
-            // 시작값 0으로 보이게
-            $el.text('0');
-
-            $({ val: 0 }).animate({ val: target }, {
-                duration: opt.duration,
-                easing: 'swing',
-                step: function (now) {
-                    // 소수 필요하면 data-decimal 지정해서 사용 가능
-                    const decimals = $el.data('decimal') ?? opt.decimal;
-                    const curr = decimals ? now.toFixed(decimals) : Math.floor(now);
-                    $el.text(formatNumber(curr));
-                },
-                complete: function () {
-                    const decimals = $el.data('decimal') ?? opt.decimal;
-                    const done = decimals ? target.toFixed(decimals) : Math.round(target);
-                    $el.text(formatNumber(done));
-                    $el.data('counted', true);
-                }
-            });
-        });
-    };
-})(jQuery);
-
-// 뷰포트 진입 시 한 번만 실행
-$(function () {
-    const $section = $('.brand-rate');
+// ─────────────────────────────────────────────────────
+// Revenue – 카운트 업
+// ─────────────────────────────────────────────────────
+$(document).ready(function () {
+    var counted = false;
 
     function runCount() {
-        $section.find('.num').countUp({ duration: 1400 });
+        if (counted) return;
+        counted = true;
+
+        $('.brand-rate .num').each(function () {
+            var $el = $(this);
+            var target = parseFloat($el.attr('data-target'));
+            if (isNaN(target) || target === 0) return;
+
+            var duration = 1400;
+            var pause = 1800;
+
+            function animate() {
+                var startTime = null;
+                $el.text('0');
+                function step(ts) {
+                    if (!startTime) startTime = ts;
+                    var p = Math.min((ts - startTime) / duration, 1);
+                    var eased = 1 - Math.pow(1 - p, 3);
+                    $el.text(formatNumber(Math.floor(eased * target)));
+                    if (p < 1) {
+                        requestAnimationFrame(step);
+                    } else {
+                        $el.text(formatNumber(target));
+                        setTimeout(animate, pause);
+                    }
+                }
+                requestAnimationFrame(step);
+            }
+            animate();
+        });
     }
 
-    if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach((e) => {
-                if (e.isIntersecting) {
-                    runCount();
-                    io.unobserve(e.target); // 한 번만
-                }
-            });
-        }, { threshold: 0.3 }); // 30% 보이면 실행
-        if ($section.length) io.observe($section[0]);
-    } else {
-        // 폴백: 스크롤 체크
-        let fired = false;
-        function inView($el) {
-            const rect = $el[0].getBoundingClientRect();
-            const vh = window.innerHeight || document.documentElement.clientHeight;
-            return rect.top < vh * 0.85 && rect.bottom > 0;
+    function check() {
+        var $section = $('.brand-rate');
+        if (!$section.length) return;
+        var top = $section.offset().top;
+        var scrollBottom = $(window).scrollTop() + $(window).height();
+        if (scrollBottom > top + 60) {
+            runCount();
+            $(window).off('scroll.revenue resize.revenue');
         }
-        function onScroll() {
-            if (!fired && $section.length && inView($section)) {
-                fired = true;
-                runCount();
-                $(window).off('scroll resize', onScroll);
-            }
-        }
-        $(window).on('scroll resize', onScroll);
-        onScroll(); // 초기 체크
     }
+
+    $(window).on('scroll.revenue resize.revenue', check);
+    check(); // 초기 즉시 확인
 });

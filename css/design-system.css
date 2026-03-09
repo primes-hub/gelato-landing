@@ -1,0 +1,786 @@
+/* ================================================================
+   GELATO LANDING — DESIGN SYSTEM v2
+   8px Grid · Token-based · Semantic Typography Scale
+   ================================================================
+
+   TYPOGRAPHY HIERARCHY (Desktop)
+   ─────────────────────────────────────────────────────────────
+   Lv 0  Display    .visual .title          clamp(2.5rem,5vw,5rem)   700
+   Lv 1  H1-equiv   .contact .title (tel)   clamp(3rem,6vw,4.5rem)   400  Oswald
+   Lv 2  H2         .sn-heading, h2         2.5rem / 40px             700
+   Lv 3  Eyebrow    .sec-tit, .lineup-cate  0.6875rem / 11px         700  uppercase gold
+   Lv 4  Section    .sec-txt, .sec-desc     1.0625rem / 17px          500  secondary
+          Sub        .lineup-sub             1.0625rem / 17px          500  secondary
+   Lv 5  Card H     .tit (partners)         1.125rem / 18px           700
+          Card H     .gelato-info h3         1.0625rem / 17px          700
+   Lv 6  Body       p (default)             1rem / 16px               400  lh 1.7
+   Lv 7  Caption    .txt1 (partners ctx)    0.6875rem / 11px          600  uppercase
+          Tag        .g-tag                  0.625rem / 10px           700  uppercase
+   ================================================================ */
+
+
+/* ────────────────────────────────────────────────────────────────
+   1. DESIGN TOKENS
+   ──────────────────────────────────────────────────────────────── */
+:root {
+    /* ── Color · Brand ── */
+    --color-brand-gold:     #c7a865;
+    --color-brand-gold-dim: rgba(199, 168, 101, 0.25);
+    --color-brand-black:    #000000;
+    --color-brand-dark:     #111111;
+    --color-brand-charcoal: #212020;
+
+    /* ── Color · Text ── */
+    --color-text-primary:   #ffffff;
+    --color-text-secondary: rgba(255, 255, 255, 0.65);
+    --color-text-muted:     rgba(255, 255, 255, 0.38);
+    --color-text-dark:      #000000;
+    --color-text-gray:      #919191;
+
+    /* ── Color · Background ── */
+    --color-bg-dark:  #000000;
+    --color-bg-char:  #212020;
+    --color-bg-light: #ffffff;
+
+    /* ── Color · Gelato Cards ── */
+    --color-gl-1: #F8F7F4;
+    --color-gl-2: #E8E3F0;
+    --color-gl-3: #FFF4E0;
+    --color-gl-4: #FBF6ED;
+    --color-gl-5: #E5DFD8;
+    --color-gl-6: #FFE8ED;
+    --color-gl-7: #F5F1E8;
+    --color-gl-8: #E8F3E8;
+
+    /* ── Spacing · 8px Grid ── */
+    --sp-1:   8px;
+    --sp-2:  16px;
+    --sp-3:  24px;
+    --sp-4:  32px;
+    --sp-5:  40px;
+    --sp-6:  48px;
+    --sp-7:  56px;
+    --sp-8:  64px;
+    --sp-9:  72px;
+    --sp-10: 80px;
+    --sp-12: 96px;
+    --sp-15: 120px;
+    --sp-16: 128px;
+    --sp-20: 160px;
+
+    /* ── Typography · Families ── */
+    --font-sans:    'Pretendard', 'Malgun Gothic', dotum, sans-serif;
+    --font-display: 'Oswald', 'Pretendard', sans-serif;
+    --font-deco:    'KerisKedyuche', serif;
+
+    /* ── Typography · Scale ── */
+    --text-2xs:  0.6875rem;  /* 11px — eyebrow, captions, tags */
+    --text-xs:   0.75rem;    /* 12px — small labels            */
+    --text-sm:   0.875rem;   /* 14px — secondary body          */
+    --text-base: 1rem;       /* 16px — body                    */
+    --text-md:   1.0625rem;  /* 17px — card titles, sub-desc   */
+    --text-lg:   1.125rem;   /* 18px — card headings           */
+    --text-xl:   1.375rem;   /* 22px — lead / highlight        */
+    --text-2xl:  1.75rem;    /* 28px — sub-headings            */
+    --text-3xl:  2.5rem;     /* 40px — H2                      */
+    --text-4xl:  3rem;       /* 48px — H1                      */
+    --text-display: clamp(2.5rem, 5vw, 5rem);   /* visual hero  */
+    --text-hero:    clamp(3rem, 6vw, 4.5rem);   /* contact tel  */
+    --text-lineup:  clamp(3.5rem, 8vw, 7rem);   /* lineup price */
+
+    /* ── Typography · Line Heights ── */
+    --leading-tight:  1.15;
+    --leading-snug:   1.35;
+    --leading-base:   1.65;
+    --leading-loose:  1.8;
+
+    /* ── Typography · Letter Spacings ── */
+    --tracking-tight:    -0.02em;
+    --tracking-normal:    0;
+    --tracking-wide:      0.04em;
+    --tracking-wider:     0.08em;
+    --tracking-caps:      0.12em;     /* eyebrow / uppercase */
+    --tracking-display:   0.05em;
+
+    /* ── Misc ── */
+    --radius-sm:   4px;
+    --radius-md:   8px;
+    --radius-full: 50px;
+    --ease-base:   0.3s ease;
+    --ease-slow:   0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --max-width:   1400px;
+
+    /* ── Layout · Mobile side padding (일관성 기준값) ── */
+    --px-mobile: 20px;
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   2. SECTION SPACING — Unified vertical rhythm
+   ──────────────────────────────────────────────────────────────── */
+.main .section {
+    padding-top:    var(--sp-15);   /* 120px */
+    padding-bottom: var(--sp-15);
+}
+
+/* Store Network → Gallery: 섹션 구분 없이 연속된 느낌 유지 */
+.main .section.gallery {
+    padding-top: var(--sp-8) !important;  /* 64px */
+}
+
+@media screen and (max-width: 1199px) {
+    .main .section             { padding-top: var(--sp-12); padding-bottom: var(--sp-12); }
+    .main .section.gallery     { padding-top: var(--sp-6)  !important; }
+}
+@media screen and (max-width: 767px) {
+    .main .section             { padding-top: var(--sp-10); padding-bottom: var(--sp-10); }
+    .main .section.gallery     { padding-top: var(--sp-5)  !important; }
+
+    /* ── 모바일 컨테이너 좌우 여백 통일 ── */
+    .w1400,
+    .dp-container {
+        padding-left:  var(--px-mobile);
+        padding-right: var(--px-mobile);
+        box-sizing: border-box;
+    }
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   3. GLOBAL TYPOGRAPHY — Shared across all sections
+   ──────────────────────────────────────────────────────────────── */
+
+/* ── Lv3: Eyebrow Label ── */
+/* .sec-tit: benefit, dispenser, partners, store-network */
+.main .section .sec-tit {
+    display: block;
+    font-family: var(--font-display);
+    font-size: var(--text-2xs);       /* 11px */
+    font-weight: 700;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-brand-gold);
+    margin-bottom: var(--sp-2);      /* 16px */
+}
+
+/* ── Lv4: Section Sub-description ── */
+/* .sec-txt: benefit, partners  /  .sec-desc: dispenser */
+.main .section .sec-txt,
+.main .section .sec-desc {
+    font-size: var(--text-md);        /* 17px */
+    font-weight: 500;
+    line-height: var(--leading-base);
+    color: var(--color-text-secondary);
+    letter-spacing: var(--tracking-normal);
+    margin-bottom: var(--sp-6);      /* 48px */
+}
+
+/* ── Lv2: Section H2 ── */
+.main .section h2,
+.main .section .sn-heading {
+    font-family: var(--font-sans);
+    font-size: var(--text-3xl);       /* 40px */
+    font-weight: 700;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text-primary);
+    margin-bottom: var(--sp-3);      /* 24px */
+}
+
+/* ── Lv6: Body ── */
+.main .section p {
+    font-size: var(--text-base);      /* 16px */
+    line-height: var(--leading-base);
+}
+
+@media screen and (max-width: 767px) {
+    .main .section .sec-txt,
+    .main .section .sec-desc    { font-size: var(--text-base); margin-bottom: var(--sp-4); }
+    .main .section h2,
+    .main .section .sn-heading  { font-size: var(--text-2xl); }
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   4. GELATO LINEUP SECTION
+   ──────────────────────────────────────────────────────────────── */
+.main .gelato-lineup {
+    padding-top:    var(--sp-15);
+    padding-bottom: var(--sp-15);
+}
+
+/* ── Header block ── */
+.main .gelato-lineup .lineup-header {
+    margin-bottom: var(--sp-10);  /* 80px */
+}
+
+/* Lv3 Eyebrow */
+.main .gelato-lineup .lineup-cate {
+    font-family: var(--font-display);
+    font-size: var(--text-2xs);       /* 11px */
+    font-weight: 700;
+    letter-spacing: var(--tracking-caps);
+    color: var(--color-brand-gold);
+    text-transform: uppercase;
+    margin-bottom: var(--sp-3);      /* 24px */
+}
+
+/* Lv0 Display number */
+.main .gelato-lineup .lineup-price {
+    font-size: var(--text-lineup);    /* fluid 56–112px */
+    font-weight: 300;
+    letter-spacing: var(--tracking-display);
+    line-height: 1;
+    color: var(--color-text-primary);
+    margin-bottom: var(--sp-3);
+}
+
+/* Gold divider */
+.main .gelato-lineup .lineup-divider {
+    width: 48px;
+    height: 1px;
+    background: var(--color-brand-gold);
+    margin: 0 auto var(--sp-3);
+}
+
+/* ── Lv4: lineup-sub — 핵심 수정 ── */
+/* 기존: 0.8125rem, 얇음, #555, uppercase → 가독성 없음          */
+/* 수정: 17px, 500weight, 자연스러운 문장, 충분한 명도            */
+.main .gelato-lineup .lineup-sub {
+    font-size: var(--text-md) !important;    /* 17px */
+    font-weight: 500 !important;
+    line-height: var(--leading-base) !important;
+    letter-spacing: var(--tracking-normal) !important;
+    color: var(--color-text-secondary) !important;
+    text-transform: none !important;
+}
+
+/* price-tag span inside lineup-sub */
+.main .gelato-lineup .lineup-sub .price-tag {
+    font-size: inherit;
+    font-weight: 400;
+    color: var(--color-brand-gold);
+    opacity: 0.9;
+}
+
+/* ── Grid ── */
+.main .gelato-lineup .gelato-grid {
+    gap: var(--sp-6) 28px;           /* 48px row, 28px col */
+}
+
+/* ── Image Container ── */
+.main .gelato-lineup .gelato-img {
+    margin-bottom: var(--sp-3);
+    border-radius: var(--radius-sm);
+    transition: box-shadow var(--ease-base);
+}
+.main .gelato-lineup .gelato-img img {
+    padding: var(--sp-4);
+    transition: transform var(--ease-slow);
+}
+
+/* ── Lv5: Card Title (h3) ── */
+.main .gelato-lineup .gelato-info h3 {
+    font-size: var(--text-md);        /* 17px */
+    font-weight: 700;
+    line-height: var(--leading-snug);
+    letter-spacing: 0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+}
+
+/* ── Lv6: Card Description ── */
+.main .gelato-lineup .gelato-info p {
+    font-size: var(--text-sm);        /* 14px */
+    font-weight: 400;
+    line-height: var(--leading-loose);
+    color: var(--color-text-muted);
+    margin-bottom: var(--sp-3);
+}
+
+/* ── Lv7: Tags ── */
+.main .gelato-lineup .g-tag {
+    padding: 5px 14px;
+    font-size: 0.625rem;              /* 10px */
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-radius: var(--radius-full);
+}
+.main .gelato-lineup .g-tag.best    { background: var(--color-brand-gold); color: #000; }
+.main .gelato-lineup .g-tag.popular { background: #fff; color: #000; }
+
+/* ── Card color classes ── */
+.gelato-img.gl-color-1 { background-color: var(--color-gl-1); }
+.gelato-img.gl-color-2 { background-color: var(--color-gl-2); }
+.gelato-img.gl-color-3 { background-color: var(--color-gl-3); }
+.gelato-img.gl-color-4 { background-color: var(--color-gl-4); }
+.gelato-img.gl-color-5 { background-color: var(--color-gl-5); }
+.gelato-img.gl-color-6 { background-color: var(--color-gl-6); }
+.gelato-img.gl-color-7 { background-color: var(--color-gl-7); }
+.gelato-img.gl-color-8 { background-color: var(--color-gl-8); }
+
+@media screen and (max-width: 1199px) {
+    .main .gelato-lineup { padding-top: var(--sp-12); padding-bottom: var(--sp-12); }
+    .main .gelato-lineup .gelato-grid { gap: var(--sp-5) 20px; }
+}
+@media screen and (max-width: 767px) {
+    .main .gelato-lineup { padding-top: var(--sp-10); padding-bottom: var(--sp-10); }
+    .main .gelato-lineup .lineup-header { margin-bottom: var(--sp-7); }
+    .main .gelato-lineup .lineup-sub { font-size: var(--text-base) !important; }
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   5. PARTNERS SECTION
+   Caution: .txt1 = English uppercase caption (≠ other sections)
+   ──────────────────────────────────────────────────────────────── */
+
+/* Lv5: Partner card 한글 제목 */
+.main .partners .partner-list .tit {
+    font-size: var(--text-lg);        /* 18px */
+    font-weight: 700;
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text-primary);
+    margin-bottom: var(--sp-1);      /* 8px */
+}
+
+/* Lv7: Partner card English caption */
+.main .partners .partner-list .txt1 {
+    font-size: var(--text-2xs);       /* 11px */
+    font-weight: 600;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-brand-gold);
+    margin-bottom: var(--sp-1);
+}
+
+/* Lv6: Partner card sub-list */
+.main .partners .partner-list .txt2 {
+    font-size: var(--text-sm);        /* 14px */
+    font-weight: 400;
+    line-height: var(--leading-base);
+    color: var(--color-text-secondary);
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   6. STORE NETWORK SECTION
+   ──────────────────────────────────────────────────────────────── */
+
+/* Lv2: 전국 주요 가맹점 현황 */
+.main .store-network .sn-heading {
+    font-family: var(--font-sans);
+    font-size: var(--text-3xl);       /* 40px */
+    font-weight: 700;
+    line-height: var(--leading-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text-primary);
+    margin-bottom: var(--sp-6);
+}
+
+/* sn-body 균형 정렬 + 지도 우측 여백 제거
+   — 이미지·SVG 동일 비율 확대 → overflow:hidden 클리핑
+   — 핀 좌표는 양쪽이 같은 비율이므로 그대로 유지 */
+.main .store-network .sn-body {
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.main .store-network .sn-map-wrap {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-left: 0 !important;
+}
+.main .store-network .sn-map-img {
+    width: 135% !important;   /* 우측 검정 여백(~30%) 밀어내기 */
+}
+.main .store-network .sn-map-svg {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    width: 135% !important;
+    pointer-events: none;
+}
+
+/* ── 태블릿 (≤1023px) ── */
+@media screen and (max-width: 1023px) {
+    .main .store-network .sn-body {
+        grid-template-columns: 1fr !important;
+        gap: 52px;
+        max-width: 640px;
+    }
+    .main .store-network .sn-stats {
+        text-align: center;
+    }
+    .main .store-network .sn-divider {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .main .store-network .sn-regions {
+        justify-items: center;
+    }
+    .main .store-network .sn-total {
+        text-align: center;
+    }
+    .main .store-network .sn-total-row {
+        justify-content: center;
+    }
+}
+
+/* ── 모바일 (≤767px) ── */
+@media screen and (max-width: 767px) {
+    .main .store-network .sn-heading {
+        font-size: var(--text-2xl);
+        margin-bottom: var(--sp-5);
+    }
+    .main .store-network .sn-body {
+        gap: 40px;
+        max-width: 100%;
+    }
+    .main .store-network .sn-stats-title {
+        font-size: clamp(1.375rem, 5vw, 1.75rem);
+    }
+    .main .store-network .sn-stats-desc {
+        font-size: 0.875rem;
+        margin-bottom: var(--sp-5);
+    }
+    .main .store-network .sn-regions {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 20px;
+        margin-bottom: var(--sp-6);
+    }
+    .main .store-network .sn-region-name {
+        font-size: 1rem;
+    }
+    /* 지도: 모바일에서 좌우 여백 없애고 전체 너비 활용 */
+    .main .store-network .sn-map-wrap {
+        margin-left:  calc(-1 * var(--px-mobile)) !important;
+        margin-right: calc(-1 * var(--px-mobile));
+        width: calc(100% + var(--px-mobile) * 2);
+    }
+    .main .store-network .sn-map-img {
+        width: 120% !important;
+        opacity: 0.45;
+    }
+    .main .store-network .sn-map-svg {
+        width: 120% !important;
+    }
+    /* 핀 크기 축소 */
+    .main .store-network .sn-pin-sm .pin-outer { width: 14px; height: 14px; }
+    .main .store-network .sn-pin-sm .pin-inner { width: 6px;  height: 6px; }
+    .main .store-network .sn-pin-md .pin-outer { width: 26px; height: 26px; }
+    .main .store-network .sn-pin-md .pin-inner { width: 10px; height: 10px; }
+    .main .store-network .sn-pin-lg .pin-outer { width: 40px; height: 40px; }
+    .main .store-network .sn-pin-lg .pin-inner { width: 16px; height: 16px; }
+    /* 숫자 크기 */
+    .main .store-network .sn-total-num {
+        font-size: clamp(2.5rem, 12vw, 3.5rem);
+    }
+}
+
+/* ── 소형 모바일 (≤480px) ── */
+@media screen and (max-width: 480px) {
+    .main .store-network .sn-regions {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 16px;
+    }
+    .main .store-network .sn-map-img {
+        width: 110% !important;
+    }
+    .main .store-network .sn-map-svg {
+        width: 110% !important;
+    }
+}
+
+/* ── Map pins ── */
+.main .store-network .sn-pin {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+.main .store-network .pin-outer {
+    position: relative;
+    border-radius: 50%;
+    background: rgba(199, 168, 101, 0.08);
+    border: 1px solid rgba(199, 168, 101, 0.45);
+}
+.main .store-network .pin-inner {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgba(199, 168, 101, 0.6);
+}
+
+/* sm */
+.main .store-network .sn-pin-sm .pin-outer { width: 20px; height: 20px; }
+.main .store-network .sn-pin-sm .pin-inner { width: 8px;  height: 8px; }
+
+/* md */
+.main .store-network .sn-pin-md .pin-outer { width: 36px; height: 36px; background: rgba(199, 168, 101, 0.14); border-color: rgba(199, 168, 101, 0.75); }
+.main .store-network .sn-pin-md .pin-inner { width: 14px; height: 14px; background: #c7a865; }
+
+/* lg — pulse */
+.main .store-network .sn-pin-lg .pin-outer { width: 58px; height: 58px; background: rgba(199, 168, 101, 0.18); border-color: #c7a865; }
+.main .store-network .sn-pin-lg .pin-inner { width: 22px; height: 22px; background: #c7a865; box-shadow: 0 0 10px rgba(199,168,101,0.8); }
+
+.main .store-network .sn-pin-lg .pin-outer::before,
+.main .store-network .sn-pin-lg .pin-outer::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 1px solid rgba(199, 168, 101, 0.55);
+    animation: map-pin-pulse 2.8s ease-out infinite;
+    transform-origin: center center;
+}
+.main .store-network .sn-pin-lg .pin-outer::after {
+    animation-delay: 1.4s;
+}
+
+@keyframes map-pin-pulse {
+    0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0;   }
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   7. REVENUE SECTION — Full layout + typography
+   ──────────────────────────────────────────────────────────────── */
+
+/* 섹션 */
+.main .section.Revenue {
+    background: #000;
+    text-align: center;
+}
+
+/* w1400 내부 정렬 */
+.main .Revenue .w1400 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Lead paragraph */
+.main .Revenue .txt1 {
+    font-size: var(--text-xl);
+    font-weight: 500;
+    line-height: var(--leading-base);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto var(--sp-10);
+}
+
+/* ── Stats grid (4열) ──
+   min-height 지정으로 IntersectionObserver threshold 30% 보장 */
+.main .Revenue .brand-rate {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 120px;               /* JS IntersectionObserver 트리거 보장 */
+}
+
+.main .Revenue .brand-rate li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sp-2);
+    flex: 1;
+    padding: var(--sp-5) var(--sp-4);
+    border-right: 1px solid var(--color-brand-gold-dim);
+}
+
+.main .Revenue .brand-rate li:last-child {
+    border-right: none;
+}
+
+/* 아이콘 */
+.main .Revenue .brand-rate .ico {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main .Revenue .brand-rate .ico img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1) opacity(0.5);
+}
+
+/* 항목 라벨 */
+.main .Revenue .brand-rate .tit {
+    font-size: var(--text-2xs);
+    font-weight: 700;
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+/* 숫자 컨테이너 */
+.main .Revenue .brand-rate .num-box p {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--color-text-primary);
+    letter-spacing: var(--tracking-display);
+    margin: 0;
+}
+
+/* 숫자 강조 (gold) */
+.main .Revenue .brand-rate .num-box .num {
+    color: var(--color-brand-gold);
+}
+
+/* ── 반응형 ── */
+@media screen and (max-width: 1023px) {
+    .main .Revenue .brand-rate li { padding: var(--sp-4) var(--sp-3); }
+    .main .Revenue .brand-rate .num-box p { font-size: var(--text-2xl); }
+}
+
+@media screen and (max-width: 767px) {
+    .main .Revenue .txt1 {
+        font-size: var(--text-base);
+        margin-bottom: var(--sp-8);
+    }
+    .main .Revenue .brand-rate {
+        flex-wrap: wrap;
+    }
+    .main .Revenue .brand-rate li {
+        flex: 1 1 calc(50% - 1px);
+        border-right: none;
+        border-bottom: 1px solid var(--color-brand-gold-dim);
+        padding: var(--sp-4) var(--sp-2);
+    }
+    .main .Revenue .brand-rate li:nth-child(odd) {
+        border-right: 1px solid var(--color-brand-gold-dim);
+    }
+    .main .Revenue .brand-rate li:nth-last-child(-n+2) {
+        border-bottom: none;
+    }
+    .main .Revenue .brand-rate .num-box p { font-size: var(--text-2xl); }
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   8. PLANS — 수익 계산 블록
+   ──────────────────────────────────────────────────────────────── */
+.dp-calc {
+    background: rgba(199, 168, 101, 0.06);
+    border: 1px solid rgba(199, 168, 101, 0.2);
+    border-radius: 10px;
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.dp-calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+.dp-calc-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.4;
+}
+.dp-calc-val {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+    font-weight: 600;
+}
+.dp-calc-divider {
+    height: 1px;
+    background: rgba(199, 168, 101, 0.25);
+    margin: 4px 0;
+}
+.dp-calc-result .dp-calc-label {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+}
+.dp-calc-profit {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #c7a865;
+    white-space: nowrap;
+}
+
+/* dp-cta 를 <a> 태그로 사용할 때 버튼 외형 유지 */
+a.dp-cta {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    line-height: normal;
+}
+
+/* ────────────────────────────────────────────────────────────────
+   9. CONTACT SECTION
+   ──────────────────────────────────────────────────────────────── */
+
+/* Lv1: 전화번호 (최상위 display) */
+.main .contact .section-tit .title {
+    font-size: var(--text-hero) !important;   /* clamp(3rem,6vw,4.5rem) */
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: var(--tracking-display);
+    line-height: var(--leading-tight);
+    color: var(--color-text-primary);
+}
+
+/* Lv2: 섹션 서브 제목 */
+.main .contact .txt1 {
+    font-size: var(--text-2xl) !important;    /* 28px */
+    font-weight: 700;
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+    color: var(--color-text-primary);
+    margin-top: var(--sp-2);
+    margin-bottom: var(--sp-2);
+}
+
+/* Lv4: 설명 */
+.main .contact .section-desc {
+    font-size: var(--text-base) !important;   /* 16px */
+    font-weight: 400;
+    line-height: var(--leading-base);
+    color: var(--color-text-secondary);
+    margin-top: var(--sp-2);
+    margin-bottom: var(--sp-5);
+}
+
+/* 신청하기 버튼 */
+.main .contact .form .btn-save span {
+    color: var(--color-text-dark) !important;
+}
+
+@media screen and (max-width: 767px) {
+    .main .contact .txt1 { font-size: var(--text-2xl) !important; }
+}
+
+
+/* ────────────────────────────────────────────────────────────────
+   9. DEMO REQUEST SECTION (.txt1 = "DEMO REQUEST" headline)
+   ──────────────────────────────────────────────────────────────── */
+.main .Plans .txt1 {
+    font-family: var(--font-display);
+    font-size: var(--text-3xl);       /* 40px */
+    font-weight: 400;
+    letter-spacing: var(--tracking-display);
+    color: var(--color-text-primary);
+}
