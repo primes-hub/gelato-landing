@@ -114,9 +114,8 @@
 .main .gelato-lineup .gelato-info p {
     font-size: 0.8125rem;
     color: #666;
-    line-height: 1.75;
-    margin-bottom: 20px;
-    flex: 1;
+    line-height: 1.65;
+    margin-bottom: 6px;
 }
 
 /* ── Price + Tag row ── */
@@ -180,4 +179,20 @@
         gap: 44px;
     }
     .main .gelato-lineup .gelato-img img { padding: 24px; }
+}
+
+/* ── Box Info (1박스 15개구성) ── */
+.main .gelato-lineup .gelato-box-info {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(199, 168, 101, 0.2);
+}
+
+.main .gelato-lineup .gelato-box-info .box-unit {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgba(199, 168, 101, 0.85);
 }
