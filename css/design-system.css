@@ -869,10 +869,11 @@ a.dp-cta {
 
 /* 타이틀 */
 .main .section.visual .text p.title {
+    font-family: 'Pretendard', 'Malgun Gothic', dotum, sans-serif !important;
     font-size: clamp(42px, 5.5vw, 68px) !important;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     line-height: 1.15 !important;
-    letter-spacing: -0.025em !important;
+    letter-spacing: -0.03em !important;
     margin-bottom: 0 !important;
 }
 

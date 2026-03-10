@@ -1,12 +1,4 @@
 <?php
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-
-require 'PHPMailer/src/Exception.php';
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-
 // honeypot 스팸 차단
 if (!empty($_POST['website'])) {
     exit;
@@ -31,34 +23,18 @@ if (empty($company) || empty($name) || empty($phone1) || empty($phone2) || empty
     exit('필수 항목을 모두 입력해주세요.');
 }
 
-// 메일 제목
+// 메일 설정
+$to      = 'help@hes.co.kr';
 $subject = '[젤라또 문의] ' . $company . ' / ' . $phone;
+$body    = "회사명 : {$company}\n대표자명 : {$name}\n연락처 : {$phone}\n\n문의내용 : {$message}";
 
-// 메일 본문
-$body = "회사명 : {$company}\n대표자명 : {$name}\n연락처 : {$phone}\n\n문의내용 : {$message}";
+$headers  = "From: help@hes.co.kr\r\n";
+$headers .= "Reply-To: help@hes.co.kr\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 
-$mail = new PHPMailer(true);
-
-try {
-    $mail->isSMTP();
-    $mail->Host       = 'smtp.cafe24.com';
-    $mail->SMTPAuth   = true;
-    $mail->Username   = 'help@hes.co.kr';
-    $mail->Password   = ''; // FTP 업로드 후 직접 입력
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port       = 587;
-    $mail->CharSet    = 'UTF-8';
-
-    $mail->setFrom('help@hes.co.kr', '젤라또 문의');
-    $mail->addAddress('help@hes.co.kr');
-
-    $mail->Subject = $subject;
-    $mail->Body    = $body;
-
-    $mail->send();
-
+if (mail($to, $subject, $body, $headers)) {
     header('Location: /gelato/mail/thankyou.html');
     exit();
-} catch (Exception $e) {
-    exit('메일 전송 실패: ' . $mail->ErrorInfo);
+} else {
+    exit('메일 전송 실패');
 }
